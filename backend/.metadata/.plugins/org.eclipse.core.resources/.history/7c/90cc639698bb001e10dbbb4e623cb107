@@ -1,0 +1,16 @@
+package com.ecomerce.authentication.component;
+
+import org.springframework.stereotype.Component;
+
+import com.ecomerce.authentication.models.CreateUser;
+import com.ecomerce.authentication.models.SignupResponse;
+
+@Component
+public class AuthenticationComponent {
+
+	public SignupResponse signup(CreateUser createuser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

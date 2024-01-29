@@ -1,0 +1,30 @@
+package com.ecomerce.authentication.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecomerce.authentication.entity.User;
+import com.ecomerce.authentication.models.CreateUser;
+import com.ecomerce.authentication.repository.UserRepository;
+
+@Service
+public class ServiceUtil {
+	@Autowired
+	private UserRepository userrepo;
+	@Autowired
+	private CommonUtils utils;
+
+	public boolean userexist(String email) {
+		User user = userrepo.findByEmailId(email);
+		if (utils.isEmpty(user))
+			return false;
+		return true;
+	}
+	public User bindUser(CreateUser userdto) {
+		User user = new User();
+		user.setEmailId(userdto.getEmailId());
+		user.setFullName(user.getFullName());
+		user.setGender(userdto.getGender());
+		return user;
+	}
+}

@@ -1,0 +1,5 @@
+package com.ecomerce.authentication.models;
+
+public class CreateUser {
+
+}

@@ -1,0 +1,36 @@
+package com.ecomerce.authentication.component;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.ecomerce.authentication.models.CreateUser;
+import com.ecomerce.authentication.models.LoginResponse;
+import com.ecomerce.authentication.models.SignupResponse;
+import com.ecomerce.authentication.models.VerificationResponse;
+import com.ecomerce.authentication.service.AuthentictionService;
+import com.ecomerce.authentication.systemutils.CommonUtils;
+import com.ecomerce.authentication.systemutils.ServiceUtil;
+
+@Component
+public class AuthenticationComponent {
+	@Autowired
+	private ServiceUtil serviceutil;
+	@Autowired
+	private AuthentictionService authservice;
+	@Autowired
+	private CommonUtils commonutils;
+	public SignupResponse signup(CreateUser createuser) {
+		if(serviceutil.userexist(createuser.getEmailId()))
+			return new SignupResponse(true, "user Already exist at this emailId");
+		else
+			return authservice.createUser(createuser);
+	}
+	public VerificationResponse signupVerification(String authtoken) {
+		return authservice.checkAuthToken(authtoken);
+	}
+	public LoginResponse login(String emailId, String password) {
+		return null;
+		
+	}
+
+}

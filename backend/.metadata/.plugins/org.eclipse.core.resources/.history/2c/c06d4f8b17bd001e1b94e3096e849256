@@ -1,0 +1,12 @@
+package com.ecomerce.authentication.systemutils;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CommonUtils {
+	public boolean isEmpty(Object data) {
+		if(null==data)
+			return true;
+		return false;
+	}
+}

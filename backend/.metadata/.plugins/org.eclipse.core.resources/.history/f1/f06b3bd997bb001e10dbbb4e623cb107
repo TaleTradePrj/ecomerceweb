@@ -1,0 +1,5 @@
+package com.ecomerce.authentication.systemutils;
+
+public class ServiceUtil {
+
+}

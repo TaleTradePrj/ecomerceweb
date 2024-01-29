@@ -1,0 +1,21 @@
+package com.ecomerce.authentication.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecomerce.authentication.entity.User;
+import com.ecomerce.authentication.models.CreateUser;
+import com.ecomerce.authentication.models.SignupResponse;
+import com.ecomerce.authentication.systemutils.ServiceUtil;
+
+@Service
+public class AuthentictionService {
+	@Autowired
+	private ServiceUtil serviceutil;
+	public SignupResponse createUser(CreateUser createuser) {
+		User user = serviceutil.bindUser(createuser);
+		
+		return null;
+	}
+
+}

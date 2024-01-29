@@ -1,0 +1,11 @@
+	package com.ecomerce.authentication.repository;
+
+import org.bson.types.ObjectId;
+@Repository
+public interface UserRepository extends MongoRepository<User, ObjectId> {
+
+	User findByEmailId(String email);
+
+	User findById(User user);
+
+}

@@ -8,7 +8,7 @@ const Services = () => {
   return (
     <Wrapper>
       <div className="container">
-        <div className="grid grid-three-column">
+        <div className="grid grid-three-column effect">
           <div className="services-1">
             <div>
               <TbTruckDelivery className="icon" />
@@ -89,7 +89,6 @@ const Wrapper = styled.section`
       }
     }
   }
-
   h3 {
     margin-top: 1.4rem;
     font-size: 2rem;

@@ -12,7 +12,10 @@ import com.ecomerce.authentication.models.VerificationResponse;
 import com.ecomerce.authentication.repository.UserAuthenticationRepository;
 import com.ecomerce.authentication.repository.UserRepository;
 import com.ecomerce.authentication.systemutils.CommonUtils;
+import com.ecomerce.authentication.systemutils.EmailService;
 import com.ecomerce.authentication.systemutils.ServiceUtil;
+
+import jakarta.mail.MessagingException;
 
 @Service
 public class AuthentictionService {
@@ -24,14 +27,22 @@ public class AuthentictionService {
 	private UserAuthenticationRepository userauthrepo;
 	@Autowired
 	private CommonUtils commonUtils;
+	@Autowired
+	private EmailService emailservice;
+//	@Autowired
+//	private UserRoleRepository userrolerepo;
 
-	public SignupResponse createUser(CreateUser createuser) {
+	@SuppressWarnings("null")
+	public SignupResponse createUser(CreateUser createuser) throws MessagingException {
 		User user = serviceutil.bindUser(createuser);
 		if (null != user) {
 			user = userrepo.save(user);
 			UserAuthentication userauth = serviceutil.bindUserAuth(createuser.getPassword(), user);
 			userauthrepo.save(userauth);
-			return new SignupResponse(userauth.getAuthToken(), true);
+//			UserRole userrole = serviceutil.bindUserRole(user);
+//			userrolerepo.save(userrole);
+			emailservice.sendMail(user.getEmailId(),userauth.getAuthToken());
+			return new SignupResponse("emaild send for verificaiton", true);
 		} else
 			return new SignupResponse("oops something wrong");
 	}

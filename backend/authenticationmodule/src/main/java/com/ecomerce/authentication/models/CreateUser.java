@@ -12,7 +12,7 @@ public class CreateUser implements Serializable {
 	private String confirmPassword;
 	private String captchaId;
 	private String captcha;
-	private boolean agreedTermsandCondition;
+	private int agreedTermsandCondition;
 	private int age;
 	private int gender;
 	
@@ -48,15 +48,11 @@ public class CreateUser implements Serializable {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public boolean isAgreedTermsandCondition() {
-		return this.agreedTermsandCondition;
+	public int getAgreedTermsandCondition() {
+		return agreedTermsandCondition;
 	}
 
-	public boolean getAgreedTermsandCondition() {
-		return this.agreedTermsandCondition;
-	}
-
-	public void setAgreedTermsandCondition(boolean agreedTermsandCondition) {
+	public void setAgreedTermsandCondition(int agreedTermsandCondition) {
 		this.agreedTermsandCondition = agreedTermsandCondition;
 	}
 

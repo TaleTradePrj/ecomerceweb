@@ -8,4 +8,6 @@ import com.ecomerce.authentication.entity.Role;
 @Repository
 public interface RoleRepository extends MongoRepository<Role, Object>{
 
+	Role findByRoleName(String roleName);
+
 }

@@ -10,6 +10,8 @@ import com.ecomerce.authentication.models.VerificationResponse;
 import com.ecomerce.authentication.service.AuthentictionService;
 import com.ecomerce.authentication.systemutils.ServiceUtil;
 
+import jakarta.mail.MessagingException;
+
 @Component
 public class AuthenticationComponent {
 	@Autowired
@@ -17,10 +19,10 @@ public class AuthenticationComponent {
 	@Autowired
 	private AuthentictionService authservice;
 
-	public SignupResponse signup(CreateUser createuser) {
+	public SignupResponse signup(CreateUser createuser) throws MessagingException {
 		if (null != createuser.getEmailId()) {
 			if (null != createuser.getPassword() && null != createuser.getConfirmPassword()) {
-				if(true == createuser.getAgreedTermsandCondition()) {
+				if(1 == createuser.getAgreedTermsandCondition()) {
 					if(createuser.getPassword().equals(createuser.getConfirmPassword())) {
 						if (serviceutil.userexist(createuser.getEmailId()))
 							return new SignupResponse(true, "user Already exist at this emailId");

@@ -26,16 +26,6 @@ public class User implements Serializable {
 	private int gender;
 	@Field
 	private int userStatus;
-//	@DBRef
-//	private UserRole userRoleId;
-//
-//	public UserRole getUserRoleId() {
-//		return userRoleId;
-//	}
-//
-//	public void setUserRoleId(UserRole userRoleId) {
-//		this.userRoleId = userRoleId;
-//	}
 
 	public String getFirstName() {
 		return this.firstName;

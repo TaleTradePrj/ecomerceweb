@@ -22,6 +22,7 @@ import com.ecomerce.authentication.models.VerifyCapResponse;
 import com.ecomerce.authentication.systemutils.CaptchaUtils;
 import com.ecomerce.authentication.systemutils.Constants;
 
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -36,12 +37,13 @@ public class AuthenticationController {
 
 	@GetMapping("/captcha")
 	public void handleRequest(HttpServletResponse response, HttpSession request) throws IOException {
+
 		caputils.generateCaptcha(response, request);
+
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<CommonResponse> signup(HttpSession request,
-			@RequestBody CreateUser createuser) {
+	public ResponseEntity<CommonResponse> signup(HttpSession request, @RequestBody CreateUser createuser) throws MessagingException {
 		VerifyCapResponse capresponse = caputils.verifyCaptcha(request, createuser.getCaptchaId(),
 				createuser.getCaptcha());
 		if (capresponse.isStatus()) {
@@ -52,7 +54,7 @@ public class AuthenticationController {
 			else if (singupresponse.isUserExist())
 				return new ResponseEntity<CommonResponse>(
 						new CommonResponse(singupresponse.getMessage(), Constants.USER_EXIST), HttpStatus.OK);
-			else 
+			else
 				return new ResponseEntity<CommonResponse>(
 						new CommonResponse(singupresponse.getMessage(), Constants.FAILED), HttpStatus.OK);
 

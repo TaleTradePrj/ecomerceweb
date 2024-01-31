@@ -8,5 +8,5 @@ import com.ecomerce.authentication.entity.Functions;
 
 @Repository
 public interface FunctionsRepository extends MongoRepository<Functions, ObjectId>{
-
+	
 }

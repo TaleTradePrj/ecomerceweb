@@ -1,11 +1,17 @@
 package com.ecomerce.authentication.systemutils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ecomerce.authentication.entity.Role;
 import com.ecomerce.authentication.entity.User;
 import com.ecomerce.authentication.entity.UserAuthentication;
+import com.ecomerce.authentication.entity.UserRole;
 import com.ecomerce.authentication.models.CreateUser;
+import com.ecomerce.authentication.repository.RoleRepository;
 import com.ecomerce.authentication.repository.UserRepository;
 
 
@@ -16,7 +22,8 @@ public class ServiceUtil {
 	private UserRepository userrepo;
 	@Autowired
 	private CommonUtils utils;
-
+	@Autowired
+	private RoleRepository rolerepo;
 	public boolean userexist(String email) {
 		User user = userrepo.findByEmailId(email);
 		if (utils.isEmpty(user))
@@ -62,5 +69,17 @@ public class ServiceUtil {
 		userauth.setToken(utils.generateToken());
 		userauth.setRefreshToken(utils.generateToken());
 		return userauth;
+	}
+
+	public UserRole bindUserRole(User user) {
+		UserRole userrole= new UserRole();
+	    Role buyerPriv = rolerepo.findByRoleName("BUYER");
+	    Role userPriv = rolerepo.findByRoleName("USER");
+		List<Role> rolelist = new ArrayList<>();
+		rolelist.add(buyerPriv);
+		rolelist.add(userPriv);
+		userrole.setUser(user);
+		userrole.setRoleId(rolelist);
+		return userrole;
 	}
 }

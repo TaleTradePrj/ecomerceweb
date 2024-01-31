@@ -1,5 +1,7 @@
 package com.ecomerce.authentication.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +18,47 @@ import com.ecomerce.authentication.models.LoginDto;
 import com.ecomerce.authentication.models.LoginResponse;
 import com.ecomerce.authentication.models.SignupResponse;
 import com.ecomerce.authentication.models.VerificationResponse;
+import com.ecomerce.authentication.models.VerifyCapResponse;
+import com.ecomerce.authentication.systemutils.CaptchaUtils;
 import com.ecomerce.authentication.systemutils.Constants;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-@RestController
+@RestController()
 public class AuthenticationController {
 	@Autowired
 	private AuthenticationComponent authcomp;
 
-	@PostMapping("/signup")
-	public ResponseEntity<CommonResponse> signup(HttpServletRequest request, @RequestBody CreateUser createuser) {
-		SignupResponse response = authcomp.signup(createuser);
-		if (response.isStatus())
-			return new ResponseEntity<CommonResponse>(new CommonResponse(Constants.SUCESS, response), HttpStatus.OK);
-		else if (response.isUserExist())
-			return new ResponseEntity<CommonResponse>(new CommonResponse(response.getMessage(), Constants.FAILED),
-					HttpStatus.OK);
-		else
-			return new ResponseEntity<CommonResponse>(new CommonResponse("oops Somethings wrong", Constants.FAILED),
-					HttpStatus.OK);
+	@Autowired
+	private CaptchaUtils caputils;
 
+	@GetMapping("/captcha")
+	public void handleRequest(HttpServletResponse response, HttpSession request) throws IOException {
+		caputils.generateCaptcha(response, request);
+	}
+
+	@PostMapping("/signup")
+	public ResponseEntity<CommonResponse> signup(HttpSession request,
+			@RequestBody CreateUser createuser) {
+		VerifyCapResponse capresponse = caputils.verifyCaptcha(request, createuser.getCaptchaId(),
+				createuser.getCaptcha());
+		if (capresponse.isStatus()) {
+			SignupResponse singupresponse = authcomp.signup(createuser);
+			if (singupresponse.isStatus())
+				return new ResponseEntity<CommonResponse>(new CommonResponse(Constants.SUCESS, singupresponse),
+						HttpStatus.OK);
+			else if (singupresponse.isUserExist())
+				return new ResponseEntity<CommonResponse>(
+						new CommonResponse(singupresponse.getMessage(), Constants.USER_EXIST), HttpStatus.OK);
+			else 
+				return new ResponseEntity<CommonResponse>(
+						new CommonResponse(singupresponse.getMessage(), Constants.FAILED), HttpStatus.OK);
+
+		} else
+			return new ResponseEntity<CommonResponse>(
+					new CommonResponse(capresponse.getMessage(), Constants.INVALID_CAPTCHA), HttpStatus.OK);
 	}
 
 	@GetMapping("/signupverification")

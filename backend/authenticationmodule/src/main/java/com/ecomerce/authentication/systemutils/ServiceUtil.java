@@ -1,15 +1,17 @@
 package com.ecomerce.authentication.systemutils;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.ecomerce.authentication.entity.User;
 import com.ecomerce.authentication.entity.UserAuthentication;
 import com.ecomerce.authentication.models.CreateUser;
 import com.ecomerce.authentication.repository.UserRepository;
 
-@Service
+
+@Component
 public class ServiceUtil {
+	
 	@Autowired
 	private UserRepository userrepo;
 	@Autowired
@@ -26,12 +28,16 @@ public class ServiceUtil {
 		try {
 			User user = new User();
 			user.setEmailId(userdto.getEmailId());
-			user.setFullName(user.getFullName());
+			user.setFirstName(userdto.getFirstName());
+			user.setLastName(userdto.getLastName());
+			user.setProfilePath(userdto.getProfilePath());
 			user.setGender(userdto.getGender());
+			user.setAge(userdto.getAge());
+			user.setUserStatus(0);
 			return user;
 		} catch (Exception e) {
 			System.out.println("ServiceUtils.BindUser" + e);
-			return null;
+			return new User();
 		}
 
 	}
@@ -45,7 +51,7 @@ public class ServiceUtil {
 			return userauth;
 		} catch (Exception e) {
 			System.out.println("ServiceUtils.BindUserAuth" + e);
-			return null;
+			return new UserAuthentication();
 		}
 		
 

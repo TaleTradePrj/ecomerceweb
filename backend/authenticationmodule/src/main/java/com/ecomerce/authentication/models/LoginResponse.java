@@ -3,10 +3,38 @@ package com.ecomerce.authentication.models;
 public class LoginResponse {
 	private boolean status;
 	private boolean notExist;
+	private boolean notverfied;
 	private String token;
 	private String refreshToken;
+	private String firstName;
+	private String lastName;
+	private String profilePath;
 	private String message;
-	private boolean notverfied;
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getProfilePath() {
+		return this.profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
+	
 
 	public boolean getStatus() {
 		return this.status;
@@ -37,9 +65,9 @@ public class LoginResponse {
 	}
 
 
-	public LoginResponse(boolean b) {
+	public LoginResponse(boolean notExist) {
         super();
-		this.notExist = b;
+		this.notExist = notExist;
     }
 
     public LoginResponse(String message) {
@@ -47,10 +75,13 @@ public class LoginResponse {
 		this.message = message;
     }
 
-    public LoginResponse(String token2, String refreshToken2) {
+    public LoginResponse(String token, String refreshToken, String firstName, String lastName, String profilePath) {
         super();
-		this.token = token2;
-		this.refreshToken = refreshToken2;
+		this.token = token;
+		this.refreshToken = refreshToken;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.profilePath = profilePath;
 		this.status = true;
     }
 
@@ -58,10 +89,10 @@ public class LoginResponse {
         super();
     }
 
-    public LoginResponse(String string, boolean b) {
+    public LoginResponse(String message, boolean notverfied) {
 		super();
-		this.message = string;
-		this.notverfied = b;
+		this.message = message;
+		this.notverfied = notverfied;
 	}
 
 	public boolean isStatus() {

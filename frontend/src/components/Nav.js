@@ -91,18 +91,7 @@ const Nav = () => {
         z-index: 9999;
         border: ${({ theme }) => theme.colors.black};
 
-        .mobile-nav-icon {
-          font-size: 4.2rem;
-          color: ${({ theme }) => theme.colors.black};
-        }
-      }
-
-      .active .mobile-nav-icon {
-        display: none;
-        font-size: 4.2rem;
-        position: absolute;
-        top: 30%;
-        right: 10%;
+        .mobile-nav-icon {Promise<IdToken | undefined>;
         color: ${({ theme }) => theme.colors.black};
         z-index: 9999;
       }

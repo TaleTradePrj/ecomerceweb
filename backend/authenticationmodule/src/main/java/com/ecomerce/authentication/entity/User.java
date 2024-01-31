@@ -8,18 +8,66 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document
-public class User implements Serializable{
+public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private ObjectId userId;
 	@Field
-	private String fullName;
+	private String firstName;
+	@Field
+	private String lastName;
+	@Field
+	private String profilePath;
+	@Field
+	private int age;
 	@Field
 	private String emailId;
 	@Field
 	private int gender;
 	@Field
 	private int userStatus;
+//	@DBRef
+//	private UserRole userRoleId;
+//
+//	public UserRole getUserRoleId() {
+//		return userRoleId;
+//	}
+//
+//	public void setUserRoleId(UserRole userRoleId) {
+//		this.userRoleId = userRoleId;
+//	}
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getProfilePath() {
+		return this.profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
+
+	public int getAge() {
+		return this.age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 
 	public ObjectId getUserId() {
 		return userId;
@@ -27,14 +75,6 @@ public class User implements Serializable{
 
 	public void setUserId(ObjectId userId) {
 		this.userId = userId;
-	}
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
 	}
 
 	public String getEmailId() {

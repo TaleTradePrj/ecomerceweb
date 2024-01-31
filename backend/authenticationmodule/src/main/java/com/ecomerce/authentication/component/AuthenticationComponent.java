@@ -18,10 +18,24 @@ public class AuthenticationComponent {
 	private AuthentictionService authservice;
 
 	public SignupResponse signup(CreateUser createuser) {
-		if (serviceutil.userexist(createuser.getEmailId()))
-			return new SignupResponse(true, "user Already exist at this emailId");
-		else
-			return authservice.createUser(createuser);
+		if (null != createuser.getEmailId()) {
+			if (null != createuser.getPassword() && null != createuser.getConfirmPassword()) {
+				if(true == createuser.getAgreedTermsandCondition()) {
+					if(createuser.getPassword().equals(createuser.getConfirmPassword())) {
+						if (serviceutil.userexist(createuser.getEmailId()))
+							return new SignupResponse(true, "user Already exist at this emailId");
+						else
+							return authservice.createUser(createuser);
+					}else
+						return new SignupResponse("passwords does'nt match");
+				}
+				else return new SignupResponse("terms and conditions not agrred");
+			} else
+				return new SignupResponse("password fields are madatory");
+
+		} else
+			return new SignupResponse("email cannot be empty");
+
 	}
 
 	public VerificationResponse signupVerification(String authtoken) {

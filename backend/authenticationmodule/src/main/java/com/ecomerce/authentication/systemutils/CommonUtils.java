@@ -3,8 +3,6 @@ package com.ecomerce.authentication.systemutils;
 import java.util.Base64;
 import java.util.UUID;
 
-import javax.print.DocFlavor.STRING;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,4 +23,7 @@ public class CommonUtils {
 		byte[] decodedBytes = Base64.getDecoder().decode(data);
         return new String(decodedBytes);
 	}
+	public String sixDId() {
+        return String.format("%06d", UUID.randomUUID().getMostSignificantBits() & 0xFFFFFF);
+    }
 }

@@ -1,5 +1,7 @@
 package com.ecomerce.authentication.entity;
 
+import java.io.Serializable;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -7,7 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document
-public class UserAuthentication {
+public class UserAuthentication implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	private ObjectId userAuthId;
 	@DBRef

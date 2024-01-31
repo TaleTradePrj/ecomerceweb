@@ -1,5 +1,0 @@
-package com.ecomerce.authentication.repository;
-
-public class UserRepository {
-
-}

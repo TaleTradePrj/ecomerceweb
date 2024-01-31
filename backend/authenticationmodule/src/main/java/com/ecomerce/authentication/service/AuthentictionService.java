@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.ecomerce.authentication.entity.User;
 import com.ecomerce.authentication.entity.UserAuthentication;
-import com.ecomerce.authentication.models.CommonResponse;
 import com.ecomerce.authentication.models.CreateUser;
 import com.ecomerce.authentication.models.LoginResponse;
 import com.ecomerce.authentication.models.SignupResponse;
@@ -33,7 +32,6 @@ public class AuthentictionService {
 			UserAuthentication userauth = serviceutil.bindUserAuth(createuser.getPassword(), user);
 			userauthrepo.save(userauth);
 			return new SignupResponse(userauth.getAuthToken(), true);
-
 		} else
 			return new SignupResponse("oops something wrong");
 	}
@@ -58,28 +56,27 @@ public class AuthentictionService {
 
 	}
 
-    public LoginResponse Login(String emailId, String password) {
+	public LoginResponse Login(String emailId, String password) {
 		try {
 			User user = userrepo.findByEmailId(emailId);
 			UserAuthentication userauth = userauthrepo.findByUser(user);
-			if(user.getUserStatus()==1){
-				if(userauth.getPassword().equals(password)){
+			if (user.getUserStatus() == 1) {
+				if (userauth.getPassword().equals(password)) {
 					userauth.setToken(commonUtils.generateToken());
 					userauth.setRefreshToken(commonUtils.generateToken());
 					userauthrepo.save(userauth);
-					return new LoginResponse(userauth.getToken(),userauth.getRefreshToken());
-				}
-				else 
+					return new LoginResponse(userauth.getToken(), userauth.getRefreshToken(), user.getFirstName(),
+							user.getLastName(), user.getProfilePath());
+				} else
 					return new LoginResponse("wrong password");
-			}
-			else{
-				return new LoginResponse("account not activated",true);
+			} else {
+				return new LoginResponse("account not activated", true);
 			}
 
 		} catch (Exception e) {
 			System.out.println(e);
 			return new LoginResponse();
 		}
-    }
+	}
 
 }

@@ -1,57 +1,38 @@
 package com.ecomerce.authentication.models;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class VerificationResponse implements Serializable{
+import com.ecomerce.authentication.entity.Role;
+
+public class VerificationResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean status;
+	private boolean wrongOtp;
+	private String message;
+	private String emailId;
+	private String FullName;
+	private String profilePath;
 	private String token;
 	private String refreshToken;
-	private String fristName;
-	private String lastName;
-	private String profilePath;
+	private List<Role> userroles;
 
-	public boolean getStatus() {
-		return this.status;
-	}
-
-
-	public String getFristName() {
-		return this.fristName;
-	}
-
-	public void setFristName(String fristName) {
-		this.fristName = fristName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getProfilePath() {
-		return this.profilePath;
-	}
-
-	public void setProfilePath(String profilePath) {
-		this.profilePath = profilePath;
-	}
-
-	
-
-	public VerificationResponse(String token2, String refreshToken2) {
+	public VerificationResponse(String token, String refreshToken, String fullName, String emailId, String profilePath,
+			List<Role> userroles) {
 		super();
 		this.status = true;
-		this.token = token2;
-		this.refreshToken = refreshToken2;
+		this.token = token;
+		this.refreshToken = refreshToken;
+		this.FullName = fullName;
+		this.emailId = emailId;
+		this.profilePath = profilePath;
+		this.userroles = userroles;
 	}
 
-	public VerificationResponse(boolean b) {
+	public VerificationResponse(String message) {
 		super();
-		this.status = b;
+		this.status = false;
+		this.message = message;
 	}
 
 	public boolean isStatus() {
@@ -60,6 +41,46 @@ public class VerificationResponse implements Serializable{
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	public boolean isWrongOtp() {
+		return wrongOtp;
+	}
+
+	public void setWrongOtp(boolean wrongOtp) {
+		this.wrongOtp = wrongOtp;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getFullName() {
+		return FullName;
+	}
+
+	public void setFullName(String fullName) {
+		FullName = fullName;
+	}
+
+	public String getProfilePath() {
+		return profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
 	}
 
 	public String getToken() {
@@ -76,6 +97,14 @@ public class VerificationResponse implements Serializable{
 
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
+	}
+
+	public List<Role> getUserroles() {
+		return userroles;
+	}
+
+	public void setUserroles(List<Role> userroles) {
+		this.userroles = userroles;
 	}
 
 }

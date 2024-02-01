@@ -11,6 +11,7 @@ import com.ecomerce.authentication.service.AuthentictionService;
 import com.ecomerce.authentication.systemutils.ServiceUtil;
 
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpSession;
 
 @Component
 public class AuthenticationComponent {
@@ -19,19 +20,19 @@ public class AuthenticationComponent {
 	@Autowired
 	private AuthentictionService authservice;
 
-	public SignupResponse signup(CreateUser createuser) throws MessagingException {
+	public SignupResponse signup(CreateUser createuser, HttpSession session) throws MessagingException {
 		if (null != createuser.getEmailId()) {
 			if (null != createuser.getPassword() && null != createuser.getConfirmPassword()) {
-				if(1 == createuser.getAgreedTermsandCondition()) {
-					if(createuser.getPassword().equals(createuser.getConfirmPassword())) {
+				if (1 == createuser.getAgreedTermsandCondition()) {
+					if (createuser.getPassword().equals(createuser.getConfirmPassword())) {
 						if (serviceutil.userexist(createuser.getEmailId()))
 							return new SignupResponse(true, "user Already exist at this emailId");
 						else
-							return authservice.createUser(createuser);
-					}else
+							return authservice.createUser(createuser, session);
+					} else
 						return new SignupResponse("passwords does'nt match");
-				}
-				else return new SignupResponse("terms and conditions not agrred");
+				} else
+					return new SignupResponse("terms and conditions not agrred");
 			} else
 				return new SignupResponse("password fields are madatory");
 
@@ -40,8 +41,12 @@ public class AuthenticationComponent {
 
 	}
 
-	public VerificationResponse signupVerification(String authtoken) {
-		return authservice.checkAuthToken(authtoken);
+	public VerificationResponse verifyOtp(String otp, HttpSession session) {
+		String authtoken = (String) session.getAttribute(otp);
+		if (null != authtoken) {
+			return authservice.verifyOtp(authtoken);
+		} else
+			return new VerificationResponse("invalid otp");
 	}
 
 	public LoginResponse login(String emailId, String password) {

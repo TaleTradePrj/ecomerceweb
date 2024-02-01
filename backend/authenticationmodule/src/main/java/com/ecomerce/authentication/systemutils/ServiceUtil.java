@@ -73,8 +73,8 @@ public class ServiceUtil {
 
 	public UserRole bindUserRole(User user) {
 		UserRole userrole= new UserRole();
-	    Role buyerPriv = rolerepo.findByRoleName("BUYER");
-	    Role userPriv = rolerepo.findByRoleName("USER");
+	    Role userPriv = rolerepo.findByRoleName("User");
+	    Role buyerPriv= rolerepo.findByRoleName("Buyer");
 		List<Role> rolelist = new ArrayList<>();
 		rolelist.add(buyerPriv);
 		rolelist.add(userPriv);

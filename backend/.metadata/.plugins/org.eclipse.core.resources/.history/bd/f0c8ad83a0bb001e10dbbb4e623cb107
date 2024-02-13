@@ -1,4 +1,0 @@
-spring.data.mongodb.uri=mongodb+srv://anandhu12:anandhu12@cluster0.um4sypg.mongodb.net/?retryWrites=true&w=majority
-spring.data.mongodb.database=authentication
-spring.datasource.hikari.maximum-pool-size=10
-spring.datasource.hikari.connection-timeout=30000

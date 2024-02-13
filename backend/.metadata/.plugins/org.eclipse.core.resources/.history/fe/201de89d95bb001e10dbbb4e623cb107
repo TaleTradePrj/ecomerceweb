@@ -1,8 +1,0 @@
-package com.ecomerce.authentication.component;
-
-import org.springframework.stereotype.Component;
-
-@Component
-public class AuthenticationComponent {
-
-}

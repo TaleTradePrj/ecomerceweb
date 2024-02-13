@@ -1,9 +1,0 @@
-package com.ecomerce.authentication.models;
-
-public class CreateUser {
-	private String emailId;
-	private String firstName;
-	private String password;
-	private int gender;
-	
-}

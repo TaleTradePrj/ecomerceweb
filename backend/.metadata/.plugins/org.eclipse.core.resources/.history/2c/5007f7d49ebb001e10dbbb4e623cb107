@@ -1,9 +1,0 @@
-package com.ecomerce.authentication.systemutils;
-
-public class CommonUtils {
-	public boolean isEmpty(Object data) {
-		if(null==data)
-			return true;
-		return false;
-	}
-}

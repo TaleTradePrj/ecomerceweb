@@ -45,10 +45,10 @@ public class AuthenticationController {
     }
 
     @GetMapping("/otpVerification")
-    public ResponseEntity<AuthenticationResponse> verifyOtp(HttpServletRequest httpServletRequest, @RequestParam String otp, HttpSession session) {
+    public ResponseEntity<AuthenticationResponse> verifyOtp(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,@RequestParam String otp, HttpSession session) {
         String VerificationToken = identityConformationComponent.verifyOtp(otp, session);
         if (null != VerificationToken) {
-            AccountActivateResponse accountActivateResponse = authenticationComponent.accountActivation(VerificationToken);
+            AccountActivateResponse accountActivateResponse = authenticationComponent.accountActivation(VerificationToken,httpServletResponse);
             if (accountActivateResponse.isStatus())
                 return new ResponseEntity<AuthenticationResponse>(AuthenticationResponse.builder().status(true).statusCode(Constants.SUCESS).message("Success").body(accountActivateResponse).build(), HttpStatus.OK);
             else

@@ -42,8 +42,8 @@ public class AuthenticationComponent {
 
     }
 
-    public AccountActivateResponse accountActivation(String verificationToken) {
-        return signupService.accountActivation(verificationToken);
+    public AccountActivateResponse accountActivation(String verificationToken, HttpServletResponse httpServletResponse) {
+        return signupService.accountActivation(verificationToken,httpServletResponse);
     }
 
     public LoginResponse login(String emailId, String password, HttpServletResponse httpServletResponse) {

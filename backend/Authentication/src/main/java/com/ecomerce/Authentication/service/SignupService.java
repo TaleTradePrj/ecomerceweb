@@ -12,6 +12,8 @@ import com.ecomerce.Authentication.repository.UserRepository;
 import com.ecomerce.Authentication.repository.UserRoleRepository;
 import com.ecomerce.Authentication.systemutils.IdManager;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +51,7 @@ public class SignupService {
         } else return SignupResponse.builder().message("Oops something went wrong").build();
     }
 
-    public AccountActivateResponse accountActivation(String verificationToken) {
+    public AccountActivateResponse accountActivation(String verificationToken, HttpServletResponse httpServletResponse) {
         try {
             UserAuthentication userAuthentication = userAuthenticationRepository.findByVerificationToken(verificationToken);
             User user;
@@ -64,7 +66,15 @@ public class SignupService {
                 UserRole userRole = userService.bindUserRole(user);
                 userRoleRepository.save(userRole);
                 //have to add the curresponding function to the user
-                return AccountActivateResponse.builder().status(true).token(userAuthentication.getToken()).refreshToken(userAuthentication.getRefreshToken()).fullName(user.getFirstName() + " " + user.getLastName()).emailId(user.getEmailId()).profilePath(user.getProfilePath()).userRoles(userRole.getRoles()).build();
+                Cookie token = new Cookie("Token",userAuthentication.getToken());
+                token.setHttpOnly(true);
+                token.setSecure(true);
+                httpServletResponse.addCookie(token);
+                Cookie refreshToken = new Cookie("refreshToken",userAuthentication.getRefreshToken());
+                refreshToken.setHttpOnly(true);
+                refreshToken.setSecure(true);
+                httpServletResponse.addCookie(refreshToken);
+                return AccountActivateResponse.builder().status(true).fullName(user.getFirstName() + " " + user.getLastName()).emailId(user.getEmailId()).profilePath(user.getProfilePath()).userRoles(userRole.getRoles()).build();
             } else return AccountActivateResponse.builder().message("INVALID OTP").build();
 
         } catch (Exception e) {

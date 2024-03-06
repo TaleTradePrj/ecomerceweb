@@ -1,10 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "./Nav";
 
 const Header = () => {
-  return (
+  const location = useLocation()
+   return (
+    location.pathname === "/userprofile" ? "" :
     <MainHeader>
       <NavLink to="/">
         <img src="./images/logo2.png" alt="my logo img" className="logo"/>
@@ -12,6 +14,7 @@ const Header = () => {
       <Nav />
     </MainHeader>
   );
+  
 };
 
 const MainHeader = styled.header`

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FaArrowUp } from 'react-icons/fa'
+import { useLocation } from 'react-router-dom';
 const GoToTop = () => {
     const [isVisible,setIsVisible] = useState(false);
     const goToBtn = () => {
@@ -21,7 +22,10 @@ const GoToTop = () => {
      //for load
      return() => window.removeEventListener('scroll',listenToScroll);
     },[])
+
+    const location = useLocation()
   return (
+    location.pathname === "/userprofile" ? "" :
     <Wrapper>
         {isVisible && (
     <div className="top-btn" onClick={goToBtn}>

@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "../styles/Button";
 import {FaGithub, FaInstagram, FaLinkedin} from "react-icons/fa";
 
 const Footer = () => {
+  const location = useLocation()
   return (
+    location.pathname === "/userprofile" ? "" :
     <>
       <Wrapper>
         <section className="contact-short">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SideOption from './SideOption'
 import { ShoppingCart } from "lucide-react"
+import LogoutBt from './LogoutBt'
 
 export default function UserSidebar({currentPage, setCurrentPage}) {
 
@@ -11,8 +12,12 @@ export default function UserSidebar({currentPage, setCurrentPage}) {
                 <ShoppingCart size={22}/>
                 <span className='text-4xl font-semibold'>ECommerce</span>
             </div>
+            <SideOption setCurrentPage={setCurrentPage} name='profile' option={currentPage}/>
             <SideOption setCurrentPage={setCurrentPage} name='orders' option={currentPage}/>
             <SideOption setCurrentPage={setCurrentPage} name='reviews' option={currentPage}/>
+            <div className='flex flex-col h-full justify-end mb-16'>
+                <LogoutBt/>
+            </div>
         </div>
     </div>
   )

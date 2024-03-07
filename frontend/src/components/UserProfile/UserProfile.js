@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import UserSidebar from './sidebar/UserSidebar'
+import ProfileDetails from './pages/ProfileDetails'
+import UserOrders from './pages/UserOrders'
+import UserReviews from './pages/UserReviews'
 
 const UserPage = (currentPage) => {
     switch(currentPage){
         case "profile":
-            return <div>Profile</div>
+            return <ProfileDetails/>
         case "orders":
-            return <div>Orders</div>
+            return <UserOrders/>
         case "reviews":
-            return <div>Reviews</div>
+            return <UserReviews/>
         default:
-            return <div>Orders</div>
+            return <ProfileDetails/>
     }
 }
 

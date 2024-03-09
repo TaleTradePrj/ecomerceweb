@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { Button } from "./styles/Button";
 import FormatPrice from "./Helpers/FormatPrice";
 import { useAuth0 } from "@auth0/auth0-react";
+import AddressAccordion from "./components/AddressAccordion";
 
 const Cart = () => {
   const { cart, clearCart, total_price, shipping_fee } = useCartContext();
@@ -54,7 +55,7 @@ const Cart = () => {
         </div>
 
         {/* order total_amount */}
-        <div className="order-total--amount">
+        <div className="order-total--amount"> 
           <div className="order-total--subdata">
             <div>
               <p>subtotal:</p>
@@ -77,6 +78,7 @@ const Cart = () => {
             </div>
           </div>
         </div>
+        <AddressAccordion/>
       </div>
     </Wrapper>
   );

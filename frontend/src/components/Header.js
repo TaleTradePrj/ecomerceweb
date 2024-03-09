@@ -8,8 +8,8 @@ const Header = () => {
    return (
     location.pathname === "/userprofile" || location.pathname === "/login" ? "" :
     <MainHeader>
-      <NavLink to="/">
-        <img src="./images/logo2.png" alt="my logo img" className="logo"/>
+      <NavLink to="/home">
+        <p className="font-bold text-5xl">ShopNest</p>
       </NavLink>
       <Nav />
     </MainHeader>

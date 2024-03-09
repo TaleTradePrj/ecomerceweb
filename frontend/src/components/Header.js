@@ -6,7 +6,7 @@ import Nav from "./Nav";
 const Header = () => {
   const location = useLocation()
    return (
-    location.pathname === "/userprofile" ? "" :
+    location.pathname === "/userprofile" || location.pathname === "/login" ? "" :
     <MainHeader>
       <NavLink to="/">
         <img src="./images/logo2.png" alt="my logo img" className="logo"/>

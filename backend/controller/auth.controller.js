@@ -33,11 +33,11 @@ export const login = async (req , res, next ) => {
 
 export const signUp = async(req , res ,next) =>{
 
-    const {name , email , password} = req.body ; 
+    const { email , password} = req.body ; 
 
     const hashPassword = bcrypt.hashSync( password , 10);
 
-    const newUser = new User({name , email , password: hashPassword});
+    const newUser = new User({ email , password: hashPassword});
 
     try {
         await newUser.save();

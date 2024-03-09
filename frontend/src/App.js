@@ -14,6 +14,9 @@ import Footer from "./components/Footer";
 import Auth from "./components/Auth";
 import GoToTop from "./components/GoToTop";
 import UserProfile from "./components/UserProfile/UserProfile";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
+import { store , persistor } from "./redux/store.js";
 const App = () => {
   const theme = {
     colors: {
@@ -40,6 +43,8 @@ const App = () => {
     },
   };
   return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
     <ThemeProvider theme={theme}>
     <BrowserRouter>
     <GlobalStyle/>
@@ -59,6 +64,10 @@ const App = () => {
     <Footer/>
     </BrowserRouter>
     </ThemeProvider>
+    </PersistGate>
+    </Provider>
+   
+
   );
 };
 

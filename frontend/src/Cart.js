@@ -7,11 +7,14 @@ import FormatPrice from "./Helpers/FormatPrice";
 import { useAuth0 } from "@auth0/auth0-react";
 import AddressAccordion from "./components/AddressAccordion";
 
+
 const Cart = () => {
   const { cart, clearCart, total_price, shipping_fee } = useCartContext();
   // console.log("🚀 ~ file: Cart.js ~ line 6 ~ Cart ~ cart", cart);
 
   const { isAuthenticated, user } = useAuth0();
+
+  
 
   if (cart.length === 0) {
     return (

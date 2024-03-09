@@ -1,16 +1,32 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { CgMenu, CgClose } from "react-icons/cg";
 import { useCartContext } from "../context/cart_context";
-import { useAuth0 } from "@auth0/auth0-react";
+
 import { Button } from "../styles/Button";
+import {useSelector , useDispatch} from 'react-redux';
+import { logout } from "../redux/UserSlice.js";
 
 const Nav = () => {
   const [menuIcon, setMenuIcon] = useState();
   const { total_item } = useCartContext();
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+
+
+  const currentUser = useSelector((state) => state.user.currentUser)
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () =>{
+    dispatch(logout());
+    navigate('/');  
+
+  }
+
+
 
   const Nav = styled.nav`
     .navbar-lists {
@@ -191,18 +207,18 @@ const Nav = () => {
               Contact
             </NavLink>
           </li>
-          {isAuthenticated && <p>{user.name}</p>}
 
-          {isAuthenticated ? (
+
+          {currentUser ? (
             <li>
               <Button
-                onClick={() => logout({ returnTo: window.location.origin })}>
+                onClick={handleLogout}>
                 Log Out
               </Button>
             </li>
           ) : (
             <li>
-              <Button onClick={() => loginWithRedirect()}>Log In</Button>
+              
             </li>
           )}
 

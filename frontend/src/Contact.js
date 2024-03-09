@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 const Contact = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -36,6 +37,18 @@ const Contact = () => {
     }
   `;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Your Message Was Sent',
+      text: 'Thanks For Contacting Us',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    })
+
+
+  }
+
   return (
     <Wrapper>
       <h2 className="common-heading">Contact page</h2>
@@ -59,17 +72,17 @@ const Contact = () => {
               type="text"
               placeholder="username"
               name="username"
-              value={isAuthenticated ? user.name : ""}
+            
               required
-              autoComplete="off"
+              
             />
 
             <input
               type="email"
               name="Email"
               placeholder="Email"
-              autoComplete="off"
-              value={isAuthenticated ? user.email : ""}
+            
+              
               required
             />
 
@@ -81,7 +94,9 @@ const Contact = () => {
               autoComplete="off"
               placeholder="Enter you message"></textarea>
 
-            <input type="submit" value="send" />
+            <input type="submit" 
+            onClick={(e) => handleSubmit(e)}
+            value="send" />
           </form>
         </div>
       </div>

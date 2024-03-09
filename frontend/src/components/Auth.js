@@ -4,6 +4,8 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import {  useDispatch } from 'react-redux'
+import { login } from '../redux/UserSlice.js'
 
 export default function Auth(props) {
     const [isLogin, setIsLogin] = useState('login')
@@ -15,7 +17,7 @@ export default function Auth(props) {
       password: "",
     })
 
-  
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -24,8 +26,9 @@ export default function Auth(props) {
       if (isLogin === 'login'){
 
         await axios.post("http://localhost:5000/api/auth/login" , {email:loginDetails.password , password:loginDetails.email} )
-        .then(() => {
-          
+        .then((res) => {
+          console.log(res)
+           dispatch(login(res.data))
           navigate('/home');})
         .catch(() => {
           Swal.fire({
@@ -47,7 +50,7 @@ export default function Auth(props) {
               icon: 'success',
               confirmButtonText: 'OK'
             })
-            setIsLogin('login');
+            
           })
           .catch((err) => {
             Swal.fire({

@@ -1,0 +1,11 @@
+2024-02-13 11:12:42,958 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-02-13 11:13:10,971 [Worker-21: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.ecomerce:authentication:0.0.1-SNAPSHOT @ /home/dr_atomic/Documents/development/ecomerce/ecomerceweb/backend/authenticationmodule/pom.xml.
+2024-02-13 11:13:11,343 [Worker-21: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /authentication/src/main/java
+2024-02-13 11:13:11,343 [Worker-21: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /authentication/src/main/resources
+2024-02-13 11:13:11,344 [Worker-21: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /authentication/src/main/resources
+2024-02-13 11:13:11,346 [Worker-21: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /authentication/src/test/java
+2024-02-13 11:13:11,346 [Worker-21: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /authentication/src/test/resources
+2024-02-13 11:13:11,633 [Worker-21: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 1 sec
+2024-02-13 11:13:12,511 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2024-02-13 11:13:12,530 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2024-02-13 11:13:12,545 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/dr_atomic/Documents/development/ecomerce/ecomerceweb/backend/authenticationmodule/src/test/resources

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import LogIcon from './LogIcon'
-import { Eye, EyeOff } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -73,13 +72,10 @@ export default function Auth(props) {
             onChange={(e) => setLoginDetails({ ...loginDetails, email: e.target.value })
           }
             placeholder="Email address" type="email" style={{textTransform: "none"}}></input>
-            <div className={`flex w-4/5 h-[3.25rem] mt-5 justify-evenly items-center border rounded-lg ${passInput ? "border-[#6254f3]" : "border-gray-700/10"} hover:border-[#6254f3] font-sans`}>
-              <input type={isPassHidden ? "password" : "text"}
+            <input type="password"
               onChange={(e) => setLoginDetails({ ...loginDetails, password: e.target.value })
             }
-              className="ms-2 h-full w-4/5 outline-0 border-0 bg-transparent shadow-none" onFocus={() => {setPassInput(!passInput)}} onBlur={() => {setPassInput(!passInput)}} placeholder="Password" style={{textTransform: "none"}}/>
-              {isPassHidden ? <Eye className="text-gray-900/50 hover:bg-gray-700/10 w-1/6 h-full p-3.5" onClick={() => {setisPassHidden(!isPassHidden)}}/> : <EyeOff className="text-gray-900/50 hover:bg-gray-700/10 w-1/6 h-full p-3.5" onClick={() => {setisPassHidden(!isPassHidden)}}/>}
-            </div>
+              className="w-4/5 h-[3.25rem] border rounded-lg border-gray-700/10 outline-0 p-3 mt-5 hover:border-[#6254f3] focus:border-[#6254f3] bg-transparent text-gray-700 placeholder-gray-400 font-sans" placeholder="Password" style={{textTransform: "none"}}/>
             <button 
             onClick={(e) => handleSubmit(e)}
             className="w-4/5 h-[3.25rem] bg-[#6254f3] text-white text-lg rounded-md mt-5 hover:bg-[#6254f3]/90 font-sans">{isLogin === "login" ? "Login" : "Sign up"}</button>

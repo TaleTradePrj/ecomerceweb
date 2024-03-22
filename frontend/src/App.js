@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import Auth from "./components/Auth";
 import GoToTop from "./components/GoToTop";
 import UserProfile from "./components/UserProfile/UserProfile";
+import AdminDash from './components/Admin/AdminDash.js'
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { store , persistor } from "./redux/store.js";
@@ -57,6 +58,7 @@ const App = () => {
       <Route path="/singleproduct/:id" element={<SingleProduct/>}/>
       <Route path="/cart" element={<Cart/>}/>
       <Route path="/userprofile" element={<UserProfile/>}/>
+      <Route path="/admin" element={<AdminDash/>}/>
       <Route path="/" element={<Auth/>}/>
       <Route path="*" element={<Error/>}/>
     </Routes>

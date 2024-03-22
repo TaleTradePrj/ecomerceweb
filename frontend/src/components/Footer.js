@@ -7,7 +7,7 @@ import {FaGithub, FaInstagram, FaLinkedin} from "react-icons/fa";
 const Footer = () => {
   const location = useLocation()
   return (
-    location.pathname === "/userprofile" || location.pathname === "/login" ? "" :
+    location.pathname === "/userprofile" || location.pathname === "/login" || location.pathname === "/admin" ? "" :
     <>
       <Wrapper>
         <section className="contact-short">

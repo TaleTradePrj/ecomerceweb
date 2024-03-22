@@ -6,7 +6,7 @@ import Nav from "./Nav";
 const Header = () => {
   const location = useLocation()
    return (
-    location.pathname === "/userprofile" || location.pathname === "/login" ? "" :
+    location.pathname === "/userprofile" || location.pathname === "/login" || location.pathname === "/admin" ? "" :
     <MainHeader>
       <NavLink to="/home">
         <p className="font-bold text-5xl">ShopNest</p>

@@ -22,7 +22,8 @@ export const addProducts = async(req , res , next) => {
     try {
         const{name , company , price , description , category , featured} = req.body;
 
-        const imagePath = req.files?.image[0]?.path;
+
+        const imagePath = req.file?.path;
 
         const uploadImage = await uploadOnCloudinary(imagePath)
 

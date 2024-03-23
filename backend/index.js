@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRouter from './routes/authRouter.js';
@@ -25,12 +25,13 @@ const app = express();
 app.use(express.json());
 
 
-app.use(corsMiddleware);
+
+app.use(corsMiddleware  );
 
 app.use(cookieParser());
 
 app.listen(PORT, () =>{
-    console.log("server is running at 3000")
+    console.log(`Server is running at ${PORT}`)
 })
 
 app.use('/api/auth' ,authRouter )

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRouter from './routes/authRouter.js';
 import cookieParser from "cookie-parser";
 import corsMiddleware from './utils/cors.js'
+import adminRouter from './routes/adminRouter.js'
 
 
 dotenv.config();
@@ -33,6 +34,8 @@ app.listen(PORT, () =>{
 })
 
 app.use('/api/auth' ,authRouter )
+app.use('/api/admin' ,adminRouter )
+
 
 // creating middleware
 

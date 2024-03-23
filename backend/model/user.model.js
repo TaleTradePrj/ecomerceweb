@@ -17,6 +17,10 @@ const userSchema = new  mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         default: () => new mongoose.Types.ObjectId(),
         unique: true
+    },
+    isAdmin: {
+        type: Boolean , 
+        default: false
     }
     
 })

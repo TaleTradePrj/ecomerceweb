@@ -13,6 +13,7 @@ export default function AdminSidebar({currentPage, setCurrentPage}) {
                 <span className='text-4xl font-semibold'>Admin</span>
             </div>
             <AdminSideOption setCurrentPage={setCurrentPage} name='dashboard' option={currentPage}/>
+            <AdminSideOption setCurrentPage={setCurrentPage} name='users' option={currentPage}/>
             <AdminSideOption setCurrentPage={setCurrentPage} name='products' option={currentPage}/>
             <div className='flex flex-col h-full justify-end mb-16'>
                 <AdminLogoutBt/>

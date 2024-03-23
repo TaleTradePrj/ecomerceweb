@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { BarChart, ShoppingBag} from "lucide-react"
+import { BarChart, ShoppingBag, UserRound} from "lucide-react"
 
 const SideIcon = (name) => {
     switch(name){
         case 'dashboard':
             return <BarChart className='me-5' size={24} strokeWidth='1.25px'/>
+        case 'users':
+            return <UserRound className='me-5' size={24} strokeWidth='1.25px'/>
         case 'products':
             return <ShoppingBag className='me-5' size={24} strokeWidth='1.25px'/>
         default:

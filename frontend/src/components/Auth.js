@@ -24,11 +24,22 @@ export default function Auth(props) {
       e.preventDefault();
       if (isLogin === 'login'){
 
-        await axios.post("http://localhost:5000/api/auth/login" , {email:loginDetails.password , password:loginDetails.email} )
+        await axios.post("http://localhost:5000/api/auth/login" , {email:loginDetails.email , password:loginDetails.password} )
         .then((res) => {
           console.log(res)
            dispatch(login(res.data))
-          navigate('/home');})
+
+           if(res.data.isAdmin){
+
+            navigate('/admin')
+
+           }
+           else{
+            navigate('/home');
+           }
+
+           
+    })
         .catch(() => {
           Swal.fire({
             title: 'Invalid Credential!',
@@ -41,7 +52,7 @@ export default function Auth(props) {
 
       }
       else{
-          await axios.post("http://localhost:5000/api/auth/sign-up" , {email:loginDetails.password , password:loginDetails.email})
+          await axios.post("http://localhost:5000/api/auth/sign-up" , {email:loginDetails.email , password:loginDetails.password})
           .then(() => {
             Swal.fire({
               title: 'Registered Succesfully',

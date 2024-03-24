@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default function AdminProducts() {
 
-  const [categorySelect, setSelectedCategory] = useState('')
+  const [categorySelect, setSelectedCategory] = useState('mobile')
 
   const [products , setProducts] = useState([]);
 
@@ -15,10 +15,6 @@ export default function AdminProducts() {
     category: "", 
     image: null 
   });
-
-  
-
-  
 
   const addProduct = async(e) => {
     e.preventDefault()
@@ -49,7 +45,7 @@ export default function AdminProducts() {
   } ,[])
 
   return (
-    <div className="flex flex-col min-h-screen w-screen">
+    <div className="flex flex-col min-h-screen w-screen mb-5">
       <span className='text-4xl font-bold p-10'>Add Product</span>
       <form className='flex flex-col ms-5' onSubmit={addProduct} encType="multipart/form-data">
         <div className="flex w-full items-center mb-10">
@@ -79,7 +75,10 @@ export default function AdminProducts() {
           type="text" className='text-3xl h-32 w-1/2 p-6 border rounded-lg bg-gray-100 normal-case outline-0 border-gray-400/50 focus:border-gray-900/50' placeholder='Description of the product' id='name' name='name'></textarea>
           <span className='ms-5 text-3xl me-3'>Category: </span>
           <select value={categorySelect}
-          onChange={(e) => setFormData({...formData , category: e.target.value})}
+          onChange={(e) => {
+            setFormData({...formData , category: e.target.value})
+            setSelectedCategory(e.target.value)
+          }}
           name='categoryselect' id='categoryselect' className='w-1/4 border text-3xl border-gray-700 rounded-lg outline-0 focus:border-gray-700'>
             <option value="mobile">Mobile</option>
             <option value="laptop">Laptop</option>

@@ -46,14 +46,14 @@ export default function AdminHome(props) {
         <p className='text-2xl useinter ps-4 pt-1 text-slate-500/75 font-semibold'>Hello Admin, Good {currentGreet()}</p>
         <div className="flex w-full pe-10">
           <div className='flex flex-col bg-[#4287f5] border border-transparent rounded-lg ms-5 mt-3 w-1/5 md:w-1/6 h-20 md:h-64 p-4 justify-center items-center cursor-pointer hover:bg-[#4287f5]/75 select-none' onClick={() => {pageFunc("users")}}>
-            <span className='text-3xl md:text-5xl useinter font-bold text-white'>{count.productCount}</span>
+            <span className='text-3xl md:text-5xl useinter font-bold text-white'>{count.userCount}</span>
             <span className='text-sm md:text-2xl useinter font-semibold text-white'>Users</span>
             <div className='hidden md:flex'>
               <Users size={72} className='text-white'/>
             </div>
           </div>
           <div className='flex flex-col bg-[#4287f5] border border-transparent rounded-lg ms-5 mt-3 w-1/5 md:w-1/6 h-20 md:h-64 p-4 justify-center items-center cursor-pointer hover:bg-[#4287f5]/75 select-none' onClick={() => {pageFunc("products")}}>
-            <span className='text-3xl md:text-5xl useinter font-bold text-white'>{count.userCount}</span>
+            <span className='text-3xl md:text-5xl useinter font-bold text-white'>{count.productCount}</span>
             <span className='text-sm md:text-2xl useinter font-semibold text-white'>Products</span>
             <div className='hidden md:flex'>
               <ShoppingBag size={72} className='text-white'/>

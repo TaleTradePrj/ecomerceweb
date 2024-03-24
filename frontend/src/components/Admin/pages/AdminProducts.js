@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 export default function AdminProducts() {
 
   const [categorySelect, setSelectedCategory] = useState('')
+
+  const [products , setProducts] = useState([]);
 
   const [formData , setFormData] = useState({
     name: "", 
@@ -14,7 +16,7 @@ export default function AdminProducts() {
     image: null 
   });
 
-  console.log(formData)
+  
 
   
 
@@ -29,6 +31,22 @@ export default function AdminProducts() {
     })
 
   }
+
+  const fetchProduct = async() => {
+
+    await axios.get("http://localhost:5000/api/admin/list-products")
+    .then((res) => {
+      setProducts(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+  }
+
+  useEffect(() => {
+    fetchProduct();
+  } ,[])
 
   return (
     <div className="flex flex-col min-h-screen w-screen">
@@ -78,17 +96,17 @@ export default function AdminProducts() {
       </form>
       <div className="flex flex-col w-full h-1/2 divide-y-4 divide-double">
           <span className='text-4xl font-bold mt-10 mb-10 ms-10'>Products</span>
-          <div className="mt-5 flex flex-col ms-5 divide-y-2 divide-solid">
-              <span className='text-3xl mt-3'>PRODUCT ID: </span>
-              <span className='text-3xl mt-3 text-gray-700/75'>PRODUCT NAME: </span>
-              <span className='text-3xl mt-3 text-gray-700/75'>PRICE: </span>
-          </div>
-
-          <div className="mt-10 flex flex-col ms-5 divide-y-2 divide-solid">
-              <span className='text-3xl mt-3'>PRODUCT ID: </span>
-              <span className='text-3xl mt-3 text-gray-700/75'>PRODUCT NAME: </span>
-              <span className='text-3xl mt-3 text-gray-700/75'>PRICE: </span>
-          </div>
+          {products.map((items) => {
+            return(
+              <div key={items._id} className="mt-5 flex flex-col ms-5 divide-y-2 divide-solid">
+                <span className='text-3xl mt-3'>PRODUCT ID: {items._id} </span>
+                <span className='text-3xl mt-3 text-gray-700/75'>PRODUCT NAME: {items.name}</span>
+                <span className='text-3xl mt-3 text-gray-700/75'>PRICE: {items.price}</span>
+                <span className='text-3xl mt-3 text-gray-700/75'>CATEGORY: {items.category}</span>
+                <span className='text-3xl mt-3 text-gray-700/75'>DESCRIPTION: {items.description}</span>
+              </div>
+            )
+          })}
       </div>
     </div>
   )

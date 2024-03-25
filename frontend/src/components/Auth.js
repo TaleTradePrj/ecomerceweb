@@ -24,7 +24,7 @@ export default function Auth(props) {
       e.preventDefault();
       if (isLogin === 'login'){
 
-        await axios.post("https://ecomerceweb-server.vercel.app/api/auth/login" , {email:loginDetails.email , password:loginDetails.password} )
+        await axios.post("http://localhost:5000/api/auth/login" , {email:loginDetails.email , password:loginDetails.password} )
         .then((res) => {
           console.log(res)
            dispatch(login(res.data))
@@ -52,7 +52,7 @@ export default function Auth(props) {
 
       }
       else{
-          await axios.post("https://ecomerceweb-server-git-main-dr-atomics-projects-62151483.vercel.app/api/auth/sign-up" , {email:loginDetails.email , password:loginDetails.password})
+          await axios.post("http://localhost:5000/api/auth/sign-up" , {email:loginDetails.email , password:loginDetails.password})
           .then(() => {
             Swal.fire({
               title: 'Registered Succesfully',

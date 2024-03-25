@@ -7,7 +7,7 @@ export default function AdminUsers() {
 
   const fetchUsers = async() => {
 
-    await axios.get("https://ecomerceweb-server.vercel.app/api/admin/list-users")
+    await axios.get("http://localhost:5000/api/admin/list-users")
     .then((res) => {
         setUsers(res.data)
     })

@@ -23,7 +23,7 @@ export default function AdminHome(props) {
 
   const fetchCount = async() => {
 
-    await axios.get("https://ecomerceweb-server.vercel.app/admin/count")
+    await axios.get("http://localhost:5000/api/admin/count")
     .then((res) => {
       setCount(res.data);
     })

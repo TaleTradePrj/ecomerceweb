@@ -18,7 +18,7 @@ export default function AdminProducts() {
 
   const addProduct = async(e) => {
     e.preventDefault()
-    await axios.post("http://localhost:5000/api/admin/add-products",formData, {headers: {'Content-Type': 'multipart/form-data'}})
+    await axios.post("https://ecomerceweb-server.vercel.app/api/admin/add-products",formData, {headers: {'Content-Type': 'multipart/form-data'}})
     .then((res) => {
       console.log(res)
     })
@@ -30,7 +30,7 @@ export default function AdminProducts() {
 
   const fetchProduct = async() => {
 
-    await axios.get("http://localhost:5000/api/admin/list-products")
+    await axios.get("https://ecomerceweb-server.vercel.app/api/admin/list-products")
     .then((res) => {
       setProducts(res.data)
     })

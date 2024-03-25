@@ -5,7 +5,7 @@ import reducer from "../Reducer/productReducer";
 const AppContext = createContext();
 
 const API = "https://api.pujakaitem.com/api/products";
-const extendedAPI = "http://localhost:5000/api/admin/list-products"
+const extendedAPI = "https://ecomerceweb-server.vercel.app/api/admin/list-products"
 
 const initialState = {
   isLoading: false,

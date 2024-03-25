@@ -57,7 +57,7 @@ export const listProducts = async(req , res , next) => {
 export const count = async (req , res , next) => {
 
     try {
-        const userCount = await User.countDocuments()
+        const userCount = await User.countDocuments({isAdmin:false})
 
         const productCount = await Product.countDocuments();
 

@@ -15,11 +15,17 @@ const UserSlice = createSlice({
         logout: (state) => {
             state.currentUser = null;
         },
+        loadingStart: (state) => {
+            state.loading = true;
+        },
+        loadingEnd: (state) => {
+            state.loading = false;
+        }
         
     },
 });
 
 
-export const { login, loginProgress, loginFailure, logout , loginSuccess } = UserSlice.actions;
+export const { login, loginProgress, loginFailure, logout , loginSuccess , loadingStart , loadingEnd} = UserSlice.actions;
 
 export default UserSlice.reducer;

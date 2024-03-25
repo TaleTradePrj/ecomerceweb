@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadingEnd, loadingStart } from '../../../redux/UserSlice.js';
+
+
 
 export default function AdminProducts() {
+
+  const loadingThing = useSelector((state) => state.user.loading)
+
+  const dispatch = useDispatch();
 
   const [categorySelect, setSelectedCategory] = useState('mobile')
 
@@ -17,18 +26,35 @@ export default function AdminProducts() {
   });
 
   const addProduct = async(e) => {
+
     e.preventDefault()
+    dispatch(loadingStart())
     await axios.post("http://localhost:5000/api/admin/add-products",formData, {headers: {'Content-Type': 'multipart/form-data'}})
     .then((res) => {
       console.log(res)
+      Swal.fire({
+        title: 'success',
+        text: 'Product added successfully',
+        icon: 'success',
+        confirmButtonText: 'OK'
+
+      })
+      dispatch(loadingEnd())
     })
     .catch((error) => {
-      console.log(error)
+      Swal.fire({
+        title: 'Failed',
+        text: 'Oops something went wrong',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      })
+      dispatch(loadingEnd())
     })
 
   }
 
   const fetchProduct = async() => {
+    
 
     await axios.get("http://localhost:5000/api/admin/list-products")
     .then((res) => {
@@ -90,7 +116,9 @@ export default function AdminProducts() {
         <div className="flex w-1/2 items-center justify-center">
           <button 
           
-          type='submit' className='mt-10 p-7 ps-2 pe-2 w-96 bg-yellow-500 text-white rounded-full hover:bg-yellow-500/75'>Submit</button>
+          type='submit' 
+          className='mt-10 p-7 ps-2 pe-2 w-96 bg-yellow-500 text-white rounded-full hover:bg-yellow-500/75'>
+            {loadingThing?"Loading...":"Submit"}</button>
         </div>
       </form>
       <div className="flex flex-col w-full h-1/2 divide-y-4 divide-double">
